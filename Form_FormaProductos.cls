@@ -1,12 +1,3 @@
-VERSION 1.0 CLASS
-BEGIN
-  MultiUse = -1  'True
-END
-Attribute VB_Name = "Form_FormaProductos"
-Attribute VB_GlobalNameSpace = False
-Attribute VB_Creatable = True
-Attribute VB_PredeclaredId = True
-Attribute VB_Exposed = False
 Option Compare Database
 Private Sub Form_Load()
 Me.txtID.Value = Nz(DMax("IdProducto", "TblProductos"), 0) + 1
@@ -32,7 +23,7 @@ Dim cantidadNuevo As String
 Dim precioNuevo As String
 Dim idNuevo As String
 
-'Verificar que no estén vacíos
+'Verificar que no estÃ©n vacÃ­os
 If Me.txtID <> "" And Me.txtProducto <> "" And Me.txtDescripcion <> "" And Me.txtCantidad <> "" And Me.txtPrecio <> "" Then
 'Verificar que el ID ya no existe
  myRs.FindFirst "IDProducto=" & Me.txtID
@@ -59,7 +50,7 @@ If Me.txtID <> "" And Me.txtProducto <> "" And Me.txtDescripcion <> "" And Me.tx
  MsgBox ("ID ya existe.")
  End If
  Else
- MsgBox ("Los campos no pueden estar vacíos.")
+ MsgBox ("Los campos no pueden estar vacÃ­os.")
  End If
 End Sub
 
