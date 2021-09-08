@@ -7,30 +7,30 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-'Melissa A. Berrios Torres
+'Melissa Berr√≠os
 'Forma Inicio
-'Verifica si el usuario y la contraseÒa son correctos para abrir la forma de Men˙ Principal y cerrar esta forma.
+'Verifica si el usuario y la contrase√±a son correctos para abrir la forma de Men√∫ Principal y cerrar esta forma.
 'Muestra un mensaje de error si son incorrectos.
 
 Option Compare Database
 
-'BotÛn Iniciar
+'Bot√≥n Iniciar
 Private Sub btnIniciar_Click()
 
-'Verificar que el usuario y la contraseÒa no estÈn vacÌos.
+'Verificar que el usuario y la contrase√±a no est√©n vac√≠os.
 If Me.txtUsuario <> "" And Me.txtContrasena <> "" Then
 
-'Si los campos no est·n vacÌos, verifica si el usuario est· en la base de datos.
+'Si los campos no est√°n vac√≠os, verifica si el usuario est√° en la base de datos.
 If (IsNull(DLookup("Usuario", "TblUsuarios", "Usuario = '" & Me.txtUsuario.Value & "'"))) Then
  
 'Si no se encuentra el usuario, muestra un mensaje de error.
  MsgBox ("Usuario no registrado.")
 
-'Si se encuentra el usuario, verifica si la contraseÒa es correcta
+'Si se encuentra el usuario, verifica si la contrase√±a es correcta
 Else
 If Me.txtContrasena.Value = DLookup("[Contrasena]", "TblUsuarios", "[Usuario]='" & Me.txtUsuario.Value & "'") Then
             
-'Si la contraseÒa es correcta, cierra esta forma y abre la forma Men˙ Principal
+'Si la contrase√±a es correcta, cierra esta forma y abre la forma Men√∫ Principal
  If DLookup("[Categoria]", "TblUsuarios", "[Usuario]='" & Me.txtUsuario.Value & "'") = "admin" Then
  DoCmd.Close acForm, "Inicio"
  DoCmd.OpenForm "MenuPrincipal"
@@ -40,20 +40,20 @@ If Me.txtContrasena.Value = DLookup("[Contrasena]", "TblUsuarios", "[Usuario]='"
  DoCmd.OpenForm "MenuVendedor"
  End If
  
-'Si la contraseÒa es incorrecta, se muestra un mensaje de error.
+'Si la contrase√±a es incorrecta, se muestra un mensaje de error.
 Else
-MsgBox ("ContraseÒa incorrecta.")
+MsgBox ("Contrase√±a incorrecta.")
 End If
 End If
 
-'Si el usuario o contraseÒa est·n vacÌo, se muestra un mensaje de error.
+'Si el usuario o contrase√±a est√°n vac√≠o, se muestra un mensaje de error.
 Else
- MsgBox ("El usuario y contraseÒa no pueden estar vacios.")
+ MsgBox ("El usuario y contrase√±a no pueden estar vacios.")
 End If
  
 
 End Sub
-'BotÛn Cerrar
+'Bot√≥n Cerrar
 Private Sub btnCerrar_Click()
 'Para cerrar la forma
 DoCmd.Close acForm, "Inicio"
