@@ -1,12 +1,3 @@
-VERSION 1.0 CLASS
-BEGIN
-  MultiUse = -1  'True
-END
-Attribute VB_Name = "Form_FormaClientes"
-Attribute VB_GlobalNameSpace = False
-Attribute VB_Creatable = True
-Attribute VB_PredeclaredId = True
-Attribute VB_Exposed = False
 Option Compare Database
 'Limpiar los campos
 Private Sub limpiarCliente()
@@ -23,7 +14,7 @@ Private Sub limpiarCliente()
  Me.txtTelefono = ""
  End Sub
  Private Sub Form_Load()
- 'Busca el prÛximo ID y lo muestra
+ 'Busca el pr√≥ximo ID y lo muestra
 Me.txtID.Value = Nz(DMax("IdCliente", "TblClientes"), 0) + 1
 End Sub
 
@@ -43,7 +34,7 @@ Dim direccionNueva As String
 Dim puebloNuevo As String
 Dim estadoNuevo As String
 Dim codigoNuevo As String
-'Verificar que los campos no estÈn vacÌos.
+'Verificar que los campos no est√©n vac√≠os.
 If Me.txtID <> "" And Me.txtNombre <> "" And Me.txtPaterno <> "" And Me.txtMaterno <> "" And Me.txtTelefono <> "" And Me.txtDireccion <> "" And Me.txtPueblo <> "" And Me.txtEstado <> "" And Me.txtCodigo <> "" Then
 
 'Verificar que el ID ya no existe
@@ -81,8 +72,8 @@ If Me.txtID <> "" And Me.txtNombre <> "" And Me.txtPaterno <> "" And Me.txtMater
  MsgBox ("ID ya existe.")
  End If
  Else
- 'Si los campos est·n vacÌos, se muestra un mensaje de error.
- MsgBox ("Los campos no pueden estar vacÌos.")
+ 'Si los campos est√°n vac√≠os, se muestra un mensaje de error.
+ MsgBox ("Los campos no pueden estar vac√≠os.")
  End If
  End Sub
 
