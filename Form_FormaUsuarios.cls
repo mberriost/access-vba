@@ -1,12 +1,3 @@
-VERSION 1.0 CLASS
-BEGIN
-  MultiUse = -1  'True
-END
-Attribute VB_Name = "Form_FormaUsuarios"
-Attribute VB_GlobalNameSpace = False
-Attribute VB_Creatable = True
-Attribute VB_PredeclaredId = True
-Attribute VB_Exposed = False
 Option Compare Database
 Private Sub Form_Load()
 Me.txtID.Value = Nz(DMax("IdUsuario", "TblUsuarios"), 0) + 1
@@ -38,13 +29,13 @@ Dim usuarioNuevo As String
 Dim contrasenaNueva As String
 Dim categoriaNueva As String
 
-'Verificar que los campos no estén vacíos.
+'Verificar que los campos no estÃ©n vacÃ­os.
 If Me.txtPaterno <> "" And Me.txtMaterno <> "" And Me.txtNombre <> "" And Me.txtID <> "" And Me.txtUsuario <> "" And Me.txtContrasena <> "" And Me.txtCategoria <> "" Then
  'Verificar que el ID ya no existe
  myRs.FindFirst "IdUsuario=" & Me.txtID
   If myRs.NoMatch Then
  
- 'Leer lo que el usuario escribió y guardarlo en la variable
+ 'Leer lo que el usuario escribiÃ³ y guardarlo en la variable
  idNuevo = txtID
  nombreNuevo = txtNombre
  inicialNueva = txtInicial
@@ -72,6 +63,6 @@ If Me.txtPaterno <> "" And Me.txtMaterno <> "" And Me.txtNombre <> "" And Me.txt
  MsgBox ("ID ya existe.")
  End If
  Else
- MsgBox ("Los campos no pueden estar vacíos.")
+ MsgBox ("Los campos no pueden estar vacÃ­os.")
  End If
 End Sub
