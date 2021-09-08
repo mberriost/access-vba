@@ -1,13 +1,4 @@
-VERSION 1.0 CLASS
-BEGIN
-  MultiUse = -1  'True
-END
-Attribute VB_Name = "Form_FormaOrden"
-Attribute VB_GlobalNameSpace = False
-Attribute VB_Creatable = True
-Attribute VB_PredeclaredId = True
-Attribute VB_Exposed = False
-'Melissa A. Berrios Torres
+'Melissa Berr√≠os
 'Forma Orden
 
 Option Compare Database
@@ -26,7 +17,7 @@ Private Sub limpiarCliente()
  Private Sub limpiarCantidad()
  Me.txtCantidad = ""
  End Sub
- 'Limpiar informaciÛn de la orden
+ 'Limpiar informaci√≥n de la orden
  Private Sub limpiarOrden()
  LblTotal.Caption = "$0.00"
  Me.txtPago = ""
@@ -46,7 +37,7 @@ Dim cantidadNueva As String
 Dim total As Currency
 
 
-'Verificar que no estÈn vacÌos
+'Verificar que no est√©n vac√≠os
 If Me.txtIDProducto <> "" And Me.txtCantidad <> "" And Me.txtIdOrden <> "" And Me.txtDetalle <> "" Then
 
  'Leer lo que el usuario escribio y guardarlo en la variable
@@ -77,7 +68,7 @@ If Me.txtIDProducto <> "" And Me.txtCantidad <> "" And Me.txtIdOrden <> "" And M
  Me.txtDetalle.Value = Nz(DMax("IdDetalleOrden", "TblDetalleOrden"), 0) + 1
 
  Else
- MsgBox ("Los campos no pueden estar vacÌos.")
+ MsgBox ("Los campos no pueden estar vac√≠os.")
  End If
  End Sub
 
@@ -92,7 +83,7 @@ Dim idClienteNueva As String
 Dim fechaNueva As String
 Dim pagoNuevo As String
 
-'Verificar que no estÈn vacÌos
+'Verificar que no est√©n vac√≠os
 If Me.txtIdOrden <> "" And Me.txtIDCliente <> "" And Me.txtFecha <> "" And Me.txtPago <> "" Then
 'Verificar que el ID ya no existe
  myRs.FindFirst "IdOrden=" & Me.txtIdOrden
@@ -111,7 +102,7 @@ If Me.txtIdOrden <> "" And Me.txtIDCliente <> "" And Me.txtFecha <> "" And Me.tx
  myRs!TipoPago = pagoNuevo
  myRs.Update
  MsgBox ("Orden registrada.")
- 'Llamar la rutina para limpiar la informaciÛn de la orden
+ 'Llamar la rutina para limpiar la informaci√≥n de la orden
  limpiarOrden
  'Buscar el proximo ID disponible y los muestra.
  Me.txtIdOrden.Value = Nz(DMax("IdOrden", "TblOrden"), 0) + 1
@@ -119,7 +110,7 @@ If Me.txtIdOrden <> "" And Me.txtIDCliente <> "" And Me.txtFecha <> "" And Me.tx
  MsgBox ("ID ya existe.")
  End If
  Else
- MsgBox ("Los campos no pueden estar vacÌos.")
+ MsgBox ("Los campos no pueden estar vac√≠os.")
  End If
  
 End Sub
@@ -136,14 +127,14 @@ Private Sub txtCantidad_LostFocus()
 Set myDatabase = CurrentDb()
 Set myRs = myDatabase.OpenRecordset("TblProductos", dbOpenDynaset)
 
-'Verificar que el campo de ID producto no estÈ vacÌo.
+'Verificar que el campo de ID producto no est√© vac√≠o.
 If Me.txtIDProducto <> "" Then
-'Si no est· vacÌo, se busca el ID ingresado en la tabla de productos.
+'Si no est√° vac√≠o, se busca el ID ingresado en la tabla de productos.
 myRs.FindFirst "IdProducto=" & Me.txtIDProducto
  'Si no se encuentra el ID en la tabla, se muestra un mensaje de error.
  If myRs.NoMatch Then
  MsgBox ("Producto no existe.")
- 'Desactivar el botÛn Registrar debido al error.
+ 'Desactivar el bot√≥n Registrar debido al error.
  btnRegistrar.Enabled = False
  'Si se encuentra el ID del producto se verifica la cantidad disponible.
  Else
@@ -157,22 +148,22 @@ If cant > myRs("Cantidad").Value Then
 MsgBox ("Cantidad no disponible.")
 'Llamar la rutina para limpiar el textbox de cantidad
 limpiarCantidad
-'Desactivar el botÛn Registrar debido al error.
+'Desactivar el bot√≥n Registrar debido al error.
 btnRegistrar.Enabled = False
-'Si la cantidad es menor, se muestra un mensaje de que est· disponible.
+'Si la cantidad es menor, se muestra un mensaje de que est√° disponible.
 Else
 
-'Activar el botÛn de Registrar.
+'Activar el bot√≥n de Registrar.
 btnRegistrar.Enabled = True
 End If
-'Si la cantidad est· vacÌa, se muestra mensaje de error.
+'Si la cantidad est√° vac√≠a, se muestra mensaje de error.
 Else
-MsgBox ("La cantidad no puede estar vacÌa.")
+MsgBox ("La cantidad no puede estar vac√≠a.")
 End If
 End If
-'Si el ID del producto est· vacÌo, se muestra mensaje de error.
+'Si el ID del producto est√° vac√≠o, se muestra mensaje de error.
 Else
-MsgBox ("El ID del producto no puede estar vacÌo.")
+MsgBox ("El ID del producto no puede estar vac√≠o.")
 End If
 End Sub
 
@@ -180,26 +171,26 @@ Private Sub txtIDCliente_LostFocus()
 'Acceder a la tabla de clientes.
 Set myDatabase = CurrentDb()
 Set myRs = myDatabase.OpenRecordset("TblClientes", dbOpenDynaset)
-'Verificar que el textbox de ID cliente no estÈ vacÌo
+'Verificar que el textbox de ID cliente no est√© vac√≠o
 If Me.txtIDCliente <> "" Then
-'Si no est· vacÌo, se verifica que le ID existe en la tabla.
+'Si no est√° vac√≠o, se verifica que le ID existe en la tabla.
 myRs.FindFirst "IdCliente=" & Me.txtIDCliente
 'Si el ID no exite en la tabla de clientes, se muestra un mensaje de error.
  If myRs.NoMatch Then
  MsgBox ("No existe este cliente.")
  'Llamar la rutina para limpiar el label del nombre del cliente y textbox de ID.
  limpiarCliente
- 'Desactivar el botÛn Registrar debido al error.
+ 'Desactivar el bot√≥n Registrar debido al error.
  btnRegistrar.Enabled = False
 'Si se encuentra el ID del cliente en la tabla, se muestra el nombre del cliente en el label.
 Else
 Me.LblCliente.Caption = myRs("Nombre").Value
-'Activar el botÛn Registrar.
+'Activar el bot√≥n Registrar.
 btnRegistrar.Enabled = True
 End If
-'Si el ID del cliente est· vacÌo, se muestra un mensaje de error.
+'Si el ID del cliente est√° vac√≠o, se muestra un mensaje de error.
 Else
- MsgBox ("El ID del cliente no puede estar vacÌo.")
+ MsgBox ("El ID del cliente no puede estar vac√≠o.")
 End If
 End Sub
 
@@ -207,27 +198,27 @@ Private Sub txtIDProducto_LostFocus()
 'Acceder a la tabla de productos.
 Set myDatabase = CurrentDb()
 Set myRs = myDatabase.OpenRecordset("TblProductos", dbOpenDynaset)
-'Verificar que el ID no estÈ vacÌo
+'Verificar que el ID no est√© vac√≠o
 If Me.txtIDProducto <> "" Then
-'Si no est· vacÌo, se busca el ID ingresado en la tabla de productos.
+'Si no est√° vac√≠o, se busca el ID ingresado en la tabla de productos.
 myRs.FindFirst "IdProducto=" & Me.txtIDProducto
  'Si no se encuentra el ID en la tabla, se muestra un mensaje de error
  If myRs.NoMatch Then
  MsgBox ("No existe este producto.")
  'Llamar la rutina para limpiar los label del producto y precio, y el textbox de ID Producto.
  limpiarProducto
- 'Desactivar el botÛn registrar debido al error.
+ 'Desactivar el bot√≥n registrar debido al error.
  btnRegistrar.Enabled = False
 Else
 'Si se encuentra el ID ingresado en la tabla, se muestra el nombre y el precio del producto en los labels.
 Me.LblProducto.Caption = myRs("NombreProducto").Value
 Me.LblPrecio.Caption = Format(myRs("Precio").Value, "Currency")
-'Activar el botÛn Registrar.
+'Activar el bot√≥n Registrar.
 btnRegistrar.Enabled = True
 
 End If
-'Si el ID el producto est· vacÌo, se encuentra un error.
+'Si el ID el producto est√° vac√≠o, se encuentra un error.
 Else
- MsgBox ("El ID del producto no puede estar vacÌo.")
+ MsgBox ("El ID del producto no puede estar vac√≠o.")
 End If
 End Sub
